@@ -1,35 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Wallet Login/Signup</title>
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Wallet | Login / Signup</title>
+  <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h1 id="form-title">Login</h1>
-            <form id="auth-form">
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <div class="input-group hidden" id="confirm-password-group">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password">
-                </div>
-                <button type="submit" id="submit-btn">Login</button>
-                <p class="toggle-text">
-                    Don't have an account? <a href="#" id="toggle-form">Sign up here</a>
-                </p>
-            </form>
+  <main class="container">
+    <section class="form-container">
+      <h1 id="form-title">Login</h1>
+      
+      <form id="auth-form" novalidate>
+        <!-- Email -->
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="Enter your email" 
+            required 
+            autocomplete="email">
         </div>
-    </div>
-    <script src="login.js"></script>
+
+        <!-- Password -->
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Enter your password" 
+            required 
+            minlength="6"
+            autocomplete="current-password">
+        </div>
+
+        <!-- Confirm Password (for signup only) -->
+        <div class="input-group hidden" id="confirm-password-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirm-password" 
+            name="confirm-password" 
+            placeholder="Confirm your password" 
+            autocomplete="new-password">
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" id="submit-btn">Login</button>
+
+        <!-- Toggle -->
+        <p class="toggle-text">
+          Don’t have an account? 
+          <a href="#" id="toggle-form">Sign up here</a>
+        </p>
+      </form>
+    </section>
+  </main>
+  <script src="login.js" defer></script>
 </body>
 </html>

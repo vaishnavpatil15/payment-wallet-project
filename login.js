@@ -1,45 +1,60 @@
-const formTitle = document.getElementById('form-title');
-const authForm = document.getElementById('auth-form');
-const submitBtn = document.getElementById('submit-btn');
-const toggleForm = document.getElementById('toggle-form');
-const confirmPasswordGroup = document.getElementById('confirm-password-group');
+// Elements
+const formTitle = document.getElementById("form-title");
+const authForm = document.getElementById("auth-form");
+const submitBtn = document.getElementById("submit-btn");
+const toggleForm = document.getElementById("toggle-form");
+const confirmPasswordGroup = document.getElementById("confirm-password-group");
 
+// State
 let isLoginMode = true;
 
-toggleForm.addEventListener('click', (event) => {
-    event.preventDefault();
-    isLoginMode = !isLoginMode;
+// Toggle form between Login and Sign Up
+toggleForm.addEventListener("click", (e) => {
+  e.preventDefault();
+  isLoginMode = !isLoginMode;
 
-    if (isLoginMode) {
-        formTitle.textContent = 'Login';
-        submitBtn.textContent = 'Login';
-        toggleForm.textContent = "Don't have an account? Sign up here";
-        confirmPasswordGroup.classList.add('hidden');
-    } else {
-        formTitle.textContent = 'Sign Up';
-        submitBtn.textContent = 'Sign Up';
-        toggleForm.textContent = 'Already have an account? Login here';
-        confirmPasswordGroup.classList.remove('hidden');
-    }
+  formTitle.textContent = isLoginMode ? "Login" : "Sign Up";
+  submitBtn.textContent = isLoginMode ? "Login" : "Sign Up";
+  toggleForm.textContent = isLoginMode
+    ? "Don't have an account? Sign up here"
+    : "Already have an account? Login here";
+
+  confirmPasswordGroup.classList.toggle("hidden", isLoginMode);
 });
 
-authForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
+// Handle form submission
+authForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    if (!isLoginMode && password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return;
-    }
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirm-password").value.trim();
 
-    if (isLoginMode) {
-        console.log('Logging in with:', { email, password });
-    } else {
-        console.log('Signing up with:', { email, password });
-    }
+  // Basic validation
+  if (!email || !password) {
+    alert("Please fill in all required fields.");
+    return;
+  }
 
-    alert(`${isLoginMode ? 'Logged in' : 'Signed up'} successfully!`);
-    authForm.reset();
+  if (!isLoginMode && password !== confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  // Simulated login/signup action
+  if (isLoginMode) {
+    console.log("Logging in with:", { email, password });
+  } else {
+    console.log("Signing up with:", { email, password });
+  }
+
+  alert(`${isLoginMode ? "Logged in" : "Signed up"} successfully!`);
+
+  // Reset form
+  authForm.reset();
+
+  // Reset confirm password field visibility if switched back to login
+  if (isLoginMode) {
+    confirmPasswordGroup.classList.add("hidden");
+  }
 });
